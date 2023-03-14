@@ -1,6 +1,34 @@
+require("dotenv").config();
+require("@nomiclabs/hardhat-etherscan");
 require("@nomicfoundation/hardhat-toolbox");
+require("hardhat-erc1820");
+// require('solidity-coverage');
 
-/** @type import('hardhat/config').HardhatUserConfig */
+
 module.exports = {
-  solidity: "0.8.17",
+  networks: {
+    hardhat: {},
+    goeril: {
+      url: process.env.ALCHEMY_GOERLI,
+      accounts: [
+        process.env.TESTNET_GOERIL_KEY
+      ],
+    },
+  },
+  solidity: {
+    compilers: [
+      {
+        version: "0.8.17",
+      },
+      {
+        version: "0.8.15",
+      },
+      {
+        version: "0.5.3",
+      },
+    ],
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
 };

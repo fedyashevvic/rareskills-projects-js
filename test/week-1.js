@@ -1,5 +1,5 @@
-import { expect } from "chai";
-import { ethers } from "hardhat";
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
 
 const ADVANCED_TOKEN_CLAIM_AMOUNT = ethers.utils.parseUnits("1000", "ether");
 

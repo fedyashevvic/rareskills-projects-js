@@ -6,11 +6,13 @@
     "verify": "npx hardhat verify --network goeril",
     "slither": "python3 -m slither . --triage",
     "coverage": "npx hardhat coverage",
-    "mythx": "python3 -m mythx --api-key analyze"
+    "mythx": "python3 -m mythx --api-key analyze",
+    "build-contracts": "sol-merger \"./contracts/module2/staking/*.sol\" ./build"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.1",
-    "hardhat": "^2.12.7"
+    "hardhat": "^2.12.7",
+    "sol-merger": "^4.3.0"
   },
   "dependencies": {
     "@nomiclabs/hardhat-etherscan": "^3.1.7",

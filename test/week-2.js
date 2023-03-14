@@ -1,5 +1,5 @@
-import { expect } from "chai";
-import { ethers, network } from "hardhat";
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
 const { MerkleTree } = require('merkletreejs')
 const keccak256 = require("keccak256");
 
