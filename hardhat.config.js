@@ -8,12 +8,12 @@ require("hardhat-erc1820");
 module.exports = {
   networks: {
     hardhat: {},
-    goeril: {
-      url: process.env.ALCHEMY_GOERLI,
-      accounts: [
-        process.env.TESTNET_GOERIL_KEY
-      ],
-    },
+    // goeril: {
+    //   url: process.env.ALCHEMY_GOERLI,
+    //   accounts: [
+    //     process.env.TESTNET_GOERIL_KEY
+    //   ],
+    // },
   },
   solidity: {
     compilers: [
@@ -26,6 +26,10 @@ module.exports = {
       {
         version: "0.5.3",
       },
+      {
+        version: "0.7.0",
+      },
+
     ],
   },
   etherscan: {
