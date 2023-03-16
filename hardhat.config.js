@@ -2,7 +2,7 @@ require("dotenv").config();
 require("@nomiclabs/hardhat-etherscan");
 require("@nomicfoundation/hardhat-toolbox");
 require("hardhat-erc1820");
-// require('solidity-coverage');
+require('solidity-coverage');
 
 
 module.exports = {

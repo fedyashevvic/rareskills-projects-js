@@ -1,0 +1,6 @@
+testMode: assertion 
+corpusDir: corpus
+seqLen: 30
+testLimit: 500000
+shrinkLimit: 10000
+balanceContract: 1000000000000000000

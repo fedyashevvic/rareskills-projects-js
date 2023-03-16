@@ -112,6 +112,17 @@ describe.only("Rare skills challenges", function () {
       await expect(tx).to.be.revertedWith("Ether value sent is not correct");
     });
 
+    it("should return 7.5% royalty after calling royaltyInfo", async () => {
+      const royaltyInfo = await NFTWithPresaleContract.royaltyInfo(1, 1000);
+      expect(royaltyInfo[0].toString()).to.eql(owner.address);
+      expect(royaltyInfo[1].toString()).to.eql('75');
+    })
+
+    it("Should return token URI", async () => {
+      await NFTWithPresaleContract.connect(account1).mint({ value: ethers.utils.parseUnits("0.01", "ether") });
+      expect(await NFTWithPresaleContract.tokenURI('0')).to.equal("/0.json");
+    });
+
     // it("Should allow user to mint nft on presale once", async () => {
     //   const { proof, tiketNum } = getProof(account1.address);
     //   let tx = await NFTWithPresaleContract.connect(account1).presale(tiketNum, proof, { value: ethers.utils.parseUnits("0.005", "ether") });
@@ -133,6 +144,24 @@ describe.only("Rare skills challenges", function () {
 
       const ownerOfToken = await staking.ownerOf(1);
       expect(ownerOfToken).to.equal(account1.address);
+    });
+
+    it("should not allow user to stake NFT that is not approved", async () => {
+      let tx = staking.connect(account1).deposit([1, 2, 3, 4, 5]);
+      await expect(tx).to.be.revertedWith("ERC721: caller is not token owner or approved");
+    });
+
+    it("should not allow user to stake NFT that is already staked", async () => {
+      await nft.connect(account1).setApprovalForAll(staking.address, true);
+      await staking.connect(account1).deposit([1, 2, 3, 4, 5]);
+      let tx = staking.connect(account1).deposit([1, 2, 3, 4, 5]);
+      await expect(tx).to.be.revertedWith("ERC721: transfer from incorrect owner");
+    });
+
+    it("should not allow user to stake NFT that is not owned", async () => {
+      await nft.connect(account1).setApprovalForAll(staking.address, true);
+      let tx = staking.connect(account2).deposit([1, 2, 3, 4, 5]);
+      await expect(tx).to.be.revertedWith("ERC721: transfer from incorrect owner");
     });
 
     it("should allow user to withdraw NFT", async () => {
