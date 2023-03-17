@@ -171,6 +171,12 @@ describe.only("Rare skills challenges", function () {
       expect(await nft.ownerOf(1)).to.equal(account1.address);
     });
 
+    it("should not allow user to withdraw NFT that is not staked", async () => {
+      let tx = staking.connect(account1).withdraw([1, 2, 3]);
+      await expect(tx).to.be.revertedWith("Not the owner OR Token not staked");
+    });
+
+
     it("should not allow user to withdraw nft of other person", async () => {
       await nft.connect(account1).setApprovalForAll(staking.address, true);
       await staking.connect(account1).deposit([1, 2, 3, 4, 5]);

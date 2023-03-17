@@ -18,8 +18,6 @@ contract Staking is Ownable, IERC721Receiver {
     address public immutable nftAddress;
     address public immutable tokenAddress;
 
-    bool public paused;
-
     struct Staker {
         uint128 tokensStaked;
         uint128 lastCheckpoint;
