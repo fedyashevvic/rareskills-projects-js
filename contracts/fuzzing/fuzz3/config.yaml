@@ -1,0 +1,6 @@
+testMode: assertion 
+corpusDir: corpus
+seqLen: 200
+testLimit: 10000
+shrinkLimit: 5000
+cryticArgs: ["--solc-remaps", "@=node_modules/@"]
